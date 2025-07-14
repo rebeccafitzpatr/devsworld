@@ -9,5 +9,7 @@ namespace devsworld.Data
             : base(options)
         {
         }
+
+        public DbSet<DsaTopic> DsaTopics { get; set; }
     }
 }
