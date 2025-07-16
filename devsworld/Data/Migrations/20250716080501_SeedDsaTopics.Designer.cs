@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using devsworld.Data;
 
@@ -11,9 +12,11 @@ using devsworld.Data;
 namespace devsworld.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250716080501_SeedDsaTopics")]
+    partial class SeedDsaTopics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,77 +94,6 @@ namespace devsworld.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("DsaQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Difficulty")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Solution")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DsaQuestions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Write a function to reverse a string.",
-                            Difficulty = "Easy",
-                            Solution = "Use two pointers or built-in reverse.",
-                            Title = "Reverse a String"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Find the maximum element in an array.",
-                            Difficulty = "Easy",
-                            Solution = "Iterate and compare elements.",
-                            Title = "Find Maximum Element"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Check if a string is a palindrome.",
-                            Difficulty = "Medium",
-                            Solution = "Compare characters from both ends.",
-                            Title = "Check Palindrome"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Given an array and a target, find two numbers that add up to the target.",
-                            Difficulty = "Medium",
-                            Solution = "Use a hash map to store complements.",
-                            Title = "Two Sum"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Merge overlapping intervals.",
-                            Difficulty = "Hard",
-                            Solution = "Sort intervals and merge if overlapping.",
-                            Title = "Merge Intervals"
-                        });
                 });
 
             modelBuilder.Entity("DsaTopic", b =>
@@ -342,40 +274,6 @@ namespace devsworld.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("UserQuestionAttempt", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("AttemptedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DsaQuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserSolution")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DsaQuestionId");
-
-                    b.ToTable("UserQuestionAttempts");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -423,21 +321,6 @@ namespace devsworld.Data.Migrations
                     b.HasOne("ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("UserQuestionAttempt", b =>
-                {
-                    b.HasOne("ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DsaQuestion", null)
-                        .WithMany()
-                        .HasForeignKey("DsaQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

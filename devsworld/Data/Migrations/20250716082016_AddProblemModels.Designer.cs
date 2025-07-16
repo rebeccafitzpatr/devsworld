@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using devsworld.Data;
 
@@ -11,9 +12,11 @@ using devsworld.Data;
 namespace devsworld.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250716082016_AddProblemModels")]
+    partial class AddProblemModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,48 +123,6 @@ namespace devsworld.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DsaQuestions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Write a function to reverse a string.",
-                            Difficulty = "Easy",
-                            Solution = "Use two pointers or built-in reverse.",
-                            Title = "Reverse a String"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Find the maximum element in an array.",
-                            Difficulty = "Easy",
-                            Solution = "Iterate and compare elements.",
-                            Title = "Find Maximum Element"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Check if a string is a palindrome.",
-                            Difficulty = "Medium",
-                            Solution = "Compare characters from both ends.",
-                            Title = "Check Palindrome"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Given an array and a target, find two numbers that add up to the target.",
-                            Difficulty = "Medium",
-                            Solution = "Use a hash map to store complements.",
-                            Title = "Two Sum"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Merge overlapping intervals.",
-                            Difficulty = "Hard",
-                            Solution = "Sort intervals and merge if overlapping.",
-                            Title = "Merge Intervals"
-                        });
                 });
 
             modelBuilder.Entity("DsaTopic", b =>
