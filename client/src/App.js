@@ -8,6 +8,9 @@ import Privacy from './pages/Privacy.tsx';
 import LearningPath from './pages/LearningPath.tsx';
 import Navbar from './components/Navbar.tsx';
 import Login from './pages/Login.tsx';
+import PracticeListPage from './pages/PracticeListPage.tsx';
+import PracticeQuestionPage from './pages/PracticeQuestionPage.tsx';
+import PracticeProgressPage from './pages/PracticeProgressPage.tsx';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
         <Route path='/privacy' element={<Privacy />} />
         <Route path='/learningpath' element={<LearningPath />} />
         <Route path='/login' element={<Login />} />
+         <Route path="/practice" element={<PracticeListPage />} />
+        <Route path="/practice/:id" element={<PracticeQuestionPage />} />
+        <Route path="/practice-progress" element={<PracticeProgressPage />} />
       </Routes>
     </BrowserRouter>
   );
