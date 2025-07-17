@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useQuestionChat } from '../hooks/useQuestionChat.ts';
 
 interface DsaQuestion {
   id: number;
@@ -18,6 +19,8 @@ const PracticeQuestionPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const { messages, sendMessage } = useQuestionChat(id);
 
   useEffect(() => {
     setLoading(true);
@@ -38,10 +41,10 @@ const PracticeQuestionPage: React.FC = () => {
     e.preventDefault();
     setResult(null);
     try {
-      const res = await axios.post('/api/practice/attempt', {
+      const res = await axios.post('http://localhost:5138/api/practice/attempt', {
         questionId: question?.id,
         userSolution,
-      });
+      }, { withCredentials:true });
       setResult(res.data.isCorrect ? 'Correct!' : 'Incorrect. Try again!');
     } catch {
       setResult('Submission failed.');
@@ -71,6 +74,27 @@ const PracticeQuestionPage: React.FC = () => {
         <button type="submit">Submit</button>
       </form>
       {result && <p style={{ marginTop: 16, color: result === 'Correct!' ? 'green' : 'red' }}>{result}</p>}
+      <div>
+        <h3>Chat</h3>
+        <div>
+          {messages.map((msg, index) => (
+            <div key={index}><strong>{msg.user}:</strong> {msg.message}</div>
+          ))}
+        </div>
+        <textarea
+          rows={2}
+          cols={60}
+          placeholder="Ask a question about the solution..."
+          onKeyDown={e => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              const content = (e.target as HTMLTextAreaElement).value;
+              sendMessage(content);
+              (e.target as HTMLTextAreaElement).value = '';
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };
