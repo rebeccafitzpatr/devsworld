@@ -17,16 +17,24 @@ export default function Login() {
     e.preventDefault();
     try {
         const loginData: LoginDto = { userName, password };
-        await axios.post(`${apiBaseUrl}/auth/login`, loginData, { 
-            withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json'
+        const response = await axios.post(
+            `${apiBaseUrl}/auth/login`, 
+            loginData, 
+            { 
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             }
-        });
-        window.location.href = "/";
-    } catch (error) {
+        );
+        
+        if (response.status === 200) {
+            window.location.href = "/";
+        }
+    } catch (error: any) {
         console.error('Login error:', error);
-        setError("Invalid username or password");
+        setError(error.response?.data?.message || "Invalid username or password");
     }
   };
 
