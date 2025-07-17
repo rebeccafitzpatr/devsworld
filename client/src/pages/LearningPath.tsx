@@ -12,7 +12,7 @@ export default function LearningPath() {
   const [topics, setTopics] = useState<DsaTopic[]>([]);
 
   useEffect(() => {
-      axios.get(`${apiBaseUrl}/api/dsatopics`).then(res => setTopics(res.data));
+      axios.get(`${apiBaseUrl}/dsatopics`).then(res => setTopics(res.data));
   }, []);
 
   return (
