@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const apiBaseUrl = process.env.API_URL;
 interface DsaQuestion {
   id: number;
   title: string;
@@ -20,7 +20,7 @@ const PracticeListPage: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5138/api/practice/questions${difficulty ? `?difficulty=${difficulty}` : ''}`, { withCredentials: true })
+        .get(`${apiBaseUrl}/practice/questions${difficulty ? `?difficulty=${difficulty}` : ''}`, { withCredentials: true })
       .then((res) => {
         console.log('API response:', res.data);
         setQuestions(Array.isArray(res.data) ? res.data : []);

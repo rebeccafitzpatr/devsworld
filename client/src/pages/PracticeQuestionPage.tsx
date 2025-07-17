@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useQuestionChat } from '../hooks/useQuestionChat.ts';
-
+const apiBaseUrl = process.env.API_URL;
 interface DsaQuestion {
   id: number;
   title: string;
@@ -20,12 +20,13 @@ const PracticeQuestionPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const { messages, sendMessage } = useQuestionChat(id);
+    const { messages, sendMessage } = useQuestionChat(id);
+    
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5138/api/practice/questions`, { withCredentials: true })
+        .get(`${apiBaseUrl}/practice/questions`, { withCredentials: true })
       .then((res) => {
         const found = res.data.find((q: DsaQuestion) => q.id === Number(id));
         setQuestion(found || null);
@@ -41,7 +42,7 @@ const PracticeQuestionPage: React.FC = () => {
     e.preventDefault();
     setResult(null);
     try {
-      const res = await axios.post('http://localhost:5138/api/practice/attempt', {
+        const res = await axios.post(`${apiBaseUrl}/practice/attempt`, {
         questionId: question?.id,
         userSolution,
       }, { withCredentials:true });
@@ -89,7 +90,7 @@ const PracticeQuestionPage: React.FC = () => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
               const content = (e.target as HTMLTextAreaElement).value;
-              sendMessage(content);
+              sendMessage(content, 'Anonymous');
               (e.target as HTMLTextAreaElement).value = '';
             }
           }}

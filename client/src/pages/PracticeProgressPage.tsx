@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const apiBaseUrl = process.env.API_URL;
 interface UserProgressDto {
   attempted: number;
   solved: number;
@@ -9,11 +10,12 @@ interface UserProgressDto {
 const PracticeProgressPage: React.FC = () => {
   const [progress, setProgress] = useState<UserProgressDto | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:5138/api/practice/progress', { withCredentials: true })
+      axios.get(`${apiBaseUrl}/practice/progress`, { withCredentials: true })
       .then(res => {
         setProgress(res.data);
         setLoading(false);
