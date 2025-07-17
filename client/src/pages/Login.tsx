@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const apiBaseUrl = process.env.REACT_APP_API_URL;
+
 export default function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -9,7 +11,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5138/api/auth/login", { userName, password }, { withCredentials: true });
+        await axios.post(`${apiBaseUrl}/api/auth/login`, { userName, password }, { withCredentials: true });
       window.location.href = "/";
     } catch {
       setError("Invalid username or password");

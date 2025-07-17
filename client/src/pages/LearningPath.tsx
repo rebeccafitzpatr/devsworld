@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const apiBaseUrl = process.env.REACT_APP_API_URL;
 type DsaTopic = {
   id: number;
   name: string;
@@ -11,7 +12,7 @@ export default function LearningPath() {
   const [topics, setTopics] = useState<DsaTopic[]>([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5138/api/dsatopics").then(res => setTopics(res.data));
+      axios.get(`${apiBaseUrl}/api/dsatopics`).then(res => setTopics(res.data));
   }, []);
 
   return (
