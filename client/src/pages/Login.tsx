@@ -11,7 +11,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        await axios.post(`${apiBaseUrl}/api/auth/login`, { userName, password }, { withCredentials: true });
+        await axios.post(`${apiBaseUrl}/auth/login`, { userName, password }, { withCredentials: true });
       window.location.href = "/";
     } catch {
       setError("Invalid username or password");
