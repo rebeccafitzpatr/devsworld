@@ -14,6 +14,7 @@ builder.Services.AddCors(options =>
 			.AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
+            .WithExposedHeaders("Set-Cookie")
     );
 });
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -26,7 +27,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<PracticeService>();
-
+builder.Services.AddControllers(); 
 
 
 
