@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import * as signalR from '@microsoft/signalr';
-
 export interface ChatMessage {
   user: string;
   message: string;
@@ -14,7 +13,7 @@ export function useQuestionChat(questionId: string | undefined) {
   useEffect(() => {
     if (!questionId) return;
     const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5138/chathub')
+        .withUrl('https://devsworld-enffcyd7dnabewb3.australiasoutheast-01.azurewebsites.net/chathub')
       .withAutomaticReconnect()
       .build();
 

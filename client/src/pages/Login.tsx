@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const apiBaseUrl = process.env.REACT_APP_API_URL;
+import { API_BASE_URL as apiBaseUrl } from "../config.ts"; // Adjust the import based on your project structure
 
 export default function Login() {
   const [userName, setUserName] = useState("");

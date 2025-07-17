@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-const apiBaseUrl = process.env.REACT_APP_API_URL;
+import { API_BASE_URL as apiBaseUrl } from '../config.ts'; // Adjust the import based on your project structure
 interface DsaQuestion {
   id: number;
   title: string;
