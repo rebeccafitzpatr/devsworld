@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const apiBaseUrl = process.env.API_URL;
+const apiBaseUrl = process.env.REACT_APP_API_URL;
 interface UserProgressDto {
   attempted: number;
   solved: number;

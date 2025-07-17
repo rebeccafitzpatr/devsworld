@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useQuestionChat } from '../hooks/useQuestionChat.ts';
-const apiBaseUrl = process.env.API_URL;
+const apiBaseUrl = process.env.REACT_APP_API_URL;
 interface DsaQuestion {
   id: number;
   title: string;
