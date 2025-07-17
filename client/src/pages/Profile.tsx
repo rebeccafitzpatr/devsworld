@@ -16,7 +16,7 @@ export default function Profile() {
   const [xp, setXp] = useState(0);
 
   useEffect(() => {
-      axios.get(`{$apiBaseUrl}/profile`, { withCredentials: true })
+      axios.get(`${apiBaseUrl}/profile`, { withCredentials: true })
       .then(res => {
         setProfile(res.data);
         setBio(res.data.bio);
@@ -26,7 +26,7 @@ export default function Profile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-      axios.post(`{$apiBaseUrl}/profile`, { bio, xp }, { withCredentials: true })
+      axios.post(`${apiBaseUrl}/profile`, { bio, xp }, { withCredentials: true })
       .then(() => alert("Profile updated!"));
   };
 
