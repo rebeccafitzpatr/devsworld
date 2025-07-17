@@ -5,7 +5,6 @@ using devsworld.Data;
 
 [ApiController]
 [Route("api/[controller]")]
-[EnableCors("AllowReactApp")]
 public class AuthController : ControllerBase
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
