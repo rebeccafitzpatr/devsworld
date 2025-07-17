@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const apiBaseUrl = process.env.REACT_APP_API_URL;
+
 type UserProfile = {
   userName: string;
   email: string;
@@ -14,7 +16,7 @@ export default function Profile() {
   const [xp, setXp] = useState(0);
 
   useEffect(() => {
-    axios.get("http://localhost:5138/api/profile", { withCredentials: true })
+      axios.get(`{$apiBaseUrl}/profile`, { withCredentials: true })
       .then(res => {
         setProfile(res.data);
         setBio(res.data.bio);
@@ -24,7 +26,7 @@ export default function Profile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    axios.post("http://localhost:5138/api/profile", { bio, xp }, { withCredentials: true })
+      axios.post(`{$apiBaseUrl}/profile`, { bio, xp }, { withCredentials: true })
       .then(() => alert("Profile updated!"));
   };
 
