@@ -10,11 +10,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
         policy => policy
-			.WithOrigins("http://localhost:3000", "https://polite-meadow-073938f00.1.azurestaticapps.net")
+            .SetIsOriginAllowed(origin => true)
+			.AllowAnyMethod()
 			.AllowAnyHeader()
-            .AllowAnyMethod()
             .AllowCredentials()
-            .WithExposedHeaders("Set-Cookie")
     );
 });
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
