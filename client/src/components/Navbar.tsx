@@ -19,7 +19,8 @@ export default function Navbar() {
             <Link to="/learningpath">Learning Path</Link>
           </li>
             <Link to="/practice">Practice</Link>
-            <Link to="/practice-progress">Progress</Link>
+                <Link to="/practice-progress">Progress</Link>
+             <Link to="/register">Register</Link>
         </ul>
       </nav>
     );

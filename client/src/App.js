@@ -10,6 +10,7 @@ import Login from './pages/Login.tsx';
 import PracticeListPage from './pages/PracticeListPage.tsx';
 import PracticeQuestionPage from './pages/PracticeQuestionPage.tsx';
 import PracticeProgressPage from './pages/PracticeProgressPage.tsx';
+import Register from './pages/Register.tsx';
 
 function App() {
   return (
@@ -22,9 +23,10 @@ function App() {
         <Route path='/privacy' element={<Privacy />} />
         <Route path='/learningpath' element={<LearningPath />} />
         <Route path='/login' element={<Login />} />
-         <Route path="/practice" element={<PracticeListPage />} />
+        <Route path="/practice" element={<PracticeListPage />} />
         <Route path="/practice/:id" element={<PracticeQuestionPage />} />
         <Route path="/practice-progress" element={<PracticeProgressPage />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

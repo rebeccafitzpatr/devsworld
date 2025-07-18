@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
-[AllowAnonymous]
+[AllowAnonymous]        
 public class AuthController : ControllerBase
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
@@ -29,10 +29,34 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+    {
+        var user = new ApplicationUser
+        {
+            UserName = dto.UserName,
+            Email = dto.Email
+        };
+
+        var result = await _userManager.CreateAsync(user, dto.Password);
+        if (result.Succeeded)
+        {
+            return Ok();
+        }
+        return BadRequest(result.Errors);
+    }
+
 }
 
 public class LoginDto
 {
     public string UserName { get; set; }
+    public string Password { get; set; }
+}
+
+public class RegisterDto
+{
+    public string UserName { get; set; }
+    public string Email { get; set; }
     public string Password { get; set; }
 }
