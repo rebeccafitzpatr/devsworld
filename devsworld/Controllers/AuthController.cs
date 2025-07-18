@@ -43,7 +43,8 @@ public class AuthController : ControllerBase
         {
             return Ok();
         }
-        return BadRequest(result.Errors);
+        // Return error descriptions for easier debugging
+        return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
     }
 
 }
