@@ -27,15 +27,6 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
-    [HttpOptions("login")]
-    public IActionResult PreflightRoute()
-    {
-        Response.Headers.Add("Access-Control-Allow-Origin", "https://polite-meadow-073938f00.1.azurestaticapps.net");
-        Response.Headers.Add("Access-Control-Allow-Methods", "POST,OPTIONS");
-        Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,Accept");
-        Response.Headers.Add("Access-Control-Allow-Credentials", "true");
-        return Ok();
-    }
 }
 
 public class LoginDto

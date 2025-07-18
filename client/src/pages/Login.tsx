@@ -3,11 +3,6 @@ import axios from "axios";
 
 import { API_BASE_URL as apiBaseUrl } from "../config.ts"; // Adjust the import based on your project structure
 
-interface LoginDto {
-    userName: string;
-    password: string;
-}
-
 export default function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +11,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        const loginData: LoginDto = { userName, password };
+        const loginData = { UserName: userName, Password: password };
         const response = await axios.post(
             `${apiBaseUrl}/auth/login`, 
             loginData, 
