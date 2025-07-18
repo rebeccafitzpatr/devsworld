@@ -22,11 +22,11 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
         var user = await _userManager.FindByNameAsync(dto.UserName);
-        if (user == null) return Unauthorized();
+        if (user == null) return Unauthorized(new { message = "User not found" });
 
         var result = await _signInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false);
         if (result.Succeeded) return Ok();
-        return Unauthorized();
+        return Unauthorized(new { message = "Invalid password" });
     }
 
     [HttpPost("register")]
