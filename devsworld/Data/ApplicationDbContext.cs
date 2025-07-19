@@ -14,7 +14,9 @@ namespace devsworld.Data
         public DbSet<DsaQuestion> DsaQuestions { get; set; } // Added for practice problems
         public DbSet<UserQuestionAttempt> UserQuestionAttempts { get; set; } // Added for user attempts
 
-        protected override void OnModelCreating(ModelBuilder builder)
+		public DbSet<ChatMessage> ChatMessages { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
