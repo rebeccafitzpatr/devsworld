@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "../styles/signin.module.css";
 import { API_BASE_URL as apiBaseUrl } from "../config.ts";
 
 export default function Register() {
@@ -34,25 +35,40 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input value={userName} onChange={e => setUserName(e.target.value)} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input value={email} onChange={e => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </div>
-        {error && <div style={{color: "red"}}>{error}</div>}
-        {success && <div style={{color: "green"}}>{success}</div>}
-        <button type="submit">Register</button>
-      </form>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.title}>Register</div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Username</label>
+            <input
+              className={styles.input}
+              value={userName}
+              onChange={e => setUserName(e.target.value)}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Email</label>
+            <input
+              className={styles.input}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Password</label>
+            <input
+              type="password"
+              className={styles.input}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+          {error && <div className={`${styles.alert} ${styles.error}`}>{error}</div>}
+          {success && <div className={`${styles.alert} ${styles.success}`}>{success}</div>}
+          <button type="submit" className={styles.button}>Register</button>
+        </form>
+      </div>
     </div>
   );
 }
