@@ -1,0 +1,144 @@
+.container {
+  margin-top: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.questionList {
+  list-style: none;
+  padding: 0;
+}
+
+.questionItem {
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.questionTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.difficulty {
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+.solveButton {
+  align-self: flex-start;
+  padding: 0.5rem 1.25rem;
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.solveButton:hover {
+  background: #0b5ed7;
+}
+
+.progressList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.progressItem {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: #842029;
+  background: #f8d7da;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success {
+  color: #0f5132;
+  background: #d1e7dd;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
+
+.backButton {
+  margin-bottom: 1rem;
+  background: none;
+  border: none;
+  color: #0d6efd;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.chatContainer {
+  margin-top: 2rem;
+  background: #f1f3f5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.chatMessage {
+  margin-bottom: 0.5rem;
+}
+
+.chatUser {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.chatInput {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
