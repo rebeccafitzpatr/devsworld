@@ -53,9 +53,11 @@ const PracticeListPage: React.FC = () => {
       {error && <div className={styles.error}>{error}</div>}
       <ul className={styles.questionList}>
         {Array.isArray(questions) && questions.map(q => (
-          <li key={q.id} className={styles.questionItem}>
-            <span className={styles.questionTitle}>{q.title}</span>
-            <span className={styles.difficulty}>{q.difficulty}</span>
+            <li key={q.id} className={styles.questionItem}>
+            <div className={styles.questionItemLeft}>
+                <span className={styles.questionTitle}>{q.title}</span>
+                <span className={styles.difficulty}>{q.difficulty}</span>
+            </div>
             <button
               className={styles.solveButton}
               onClick={() => navigate(`/practice/${q.id}`)}

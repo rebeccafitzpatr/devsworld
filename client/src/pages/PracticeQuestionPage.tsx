@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useQuestionChat } from '../hooks/useQuestionChat.ts';
-import { API_BASE_URL as apiBaseUrl } from '../config.ts'; // Adjust the import based on your project structure }
+import styles from '../styles/practice.module.css';
+import { API_BASE_URL as apiBaseUrl } from '../config.ts';
+
 interface DsaQuestion {
   id: number;
   title: string;
@@ -20,13 +22,12 @@ const PracticeQuestionPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-    const { messages, sendMessage } = useQuestionChat(id);
-    
+  const { messages, sendMessage } = useQuestionChat(id);
 
   useEffect(() => {
     setLoading(true);
     axios
-        .get(`${apiBaseUrl}/practice/questions`, { withCredentials: true })
+      .get(`${apiBaseUrl}/practice/questions`, { withCredentials: true })
       .then((res) => {
         const found = res.data.find((q: DsaQuestion) => q.id === Number(id));
         setQuestion(found || null);
@@ -42,49 +43,56 @@ const PracticeQuestionPage: React.FC = () => {
     e.preventDefault();
     setResult(null);
     try {
-        const res = await axios.post(`${apiBaseUrl}/practice/attempt`, {
+      const res = await axios.post(`${apiBaseUrl}/practice/attempt`, {
         questionId: question?.id,
         userSolution,
-      }, { withCredentials:true });
+      }, { withCredentials: true });
       setResult(res.data.isCorrect ? 'Correct!' : 'Incorrect. Try again!');
     } catch {
       setResult('Submission failed.');
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error || !question) return <p>{error || 'Question not found.'}</p>;
+  if (loading) return <div className={styles.loading}>Loading...</div>;
+  if (error || !question) return <div className={styles.error}>{error || 'Question not found.'}</div>;
 
   return (
-    <div className="container">
-      <button onClick={() => navigate(-1)}>&larr; Back</button>
-      <h2>{question.title}</h2>
-      <p><strong>Difficulty:</strong> {question.difficulty}</p>
-      <p>{question.description}</p>
+    <div className={styles.container}>
+      <button className={styles.backButton} onClick={() => navigate(-1)}>&larr; Back</button>
+      <div className={styles.header}>{question.title}</div>
+      <div className={styles.difficulty}><strong>Difficulty:</strong> {question.difficulty}</div>
+          <div className={styles.description}>{question.description}</div>
       <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
-        <label>Your Solution:</label>
-        <br />
-        <textarea
-          value={userSolution}
-          onChange={e => setUserSolution(e.target.value)}
-          rows={5}
-          cols={60}
-          required
-        />
-        <br />
-        <button type="submit">Submit</button>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Your Solution:</label>
+          <textarea
+            className={styles.input}
+            value={userSolution}
+            onChange={e => setUserSolution(e.target.value)}
+            rows={5}
+            required
+                  />
+          <button type="submit" className={styles.solveButton}>Submit</button>
+        </div>
+        
       </form>
-      {result && <p style={{ marginTop: 16, color: result === 'Correct!' ? 'green' : 'red' }}>{result}</p>}
-      <div>
+      {result && (
+        <div className={result === 'Correct!' ? styles.success : styles.error} style={{ marginTop: 16 }}>
+          {result}
+        </div>
+      )}
+      <div className={styles.chatContainer}>
         <h3>Chat</h3>
         <div>
           {messages.map((msg, index) => (
-            <div key={index}><strong>{msg.user}:</strong> {msg.message}</div>
+            <div key={index} className={styles.chatMessage}>
+              <span className={styles.chatUser}>{msg.user}:</span> {msg.message}
+            </div>
           ))}
         </div>
         <textarea
+          className={styles.chatInput}
           rows={2}
-          cols={60}
           placeholder="Ask a question about the solution..."
           onKeyDown={e => {
             if (e.key === 'Enter' && !e.shiftKey) {
