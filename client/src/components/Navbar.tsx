@@ -20,7 +20,8 @@ export default function Navbar() {
           </li>
             <Link to="/practice">Practice</Link>
                 <Link to="/practice-progress">Progress</Link>
-             <Link to="/register">Register</Link>
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
         </ul>
       </nav>
     );
