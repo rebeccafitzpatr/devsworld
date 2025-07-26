@@ -1,93 +1,92 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "../styles/profile.module.css";
 import { API_BASE_URL as apiBaseUrl } from "../config.ts";
-
-type UserProfile = {
-  userName: string;
-  email: string;
-  xp: number;
-  bio: string;
-};
+import styles from "../styles/profile.module.css";
+import { useTheme } from "../ThemeContext";
 
 export default function Profile() {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [bio, setBio] = useState("");
-  const [xp, setXp] = useState(0);
+  const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     axios
       .get(`${apiBaseUrl}/profile`, { withCredentials: true })
       .then((res) => {
         setProfile(res.data);
-        setBio(res.data.bio);
-        setXp(res.data.xp);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setError("Failed to load profile");
+        setLoading(false);
+      });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSuccess("");
+  const handleSave = async () => {
     setError("");
-    axios
-      .post(`${apiBaseUrl}/profile`, { bio, xp }, { withCredentials: true })
-      .then(() => setSuccess("Profile updated!"))
-      .catch(() => setError("Failed to update profile."));
+    setSuccess("");
+    try {
+      await axios.post(`${apiBaseUrl}/profile`, profile, {
+        withCredentials: true,
+      });
+      setSuccess("Profile updated successfully");
+    } catch {
+      setError("Failed to update profile");
+    }
   };
 
   if (loading)
-    return (
-      <div className={styles.spinnerWrapper}>
-        <div className="spinner-border" />
-      </div>
-    );
-  if (!profile)
-    return (
-      <div className={styles.spinnerWrapper}>Profile not found.</div>
-    );
+    return <div className={styles.spinnerWrapper}>Loading...</div>;
+  if (error) return <div className={styles.error}>{error}</div>;
+  if (!profile) return null;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-theme={theme}>
       <div className={styles.card}>
         <div className={styles.avatarWrapper}>
           <img
-            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-              profile.userName
-            )}&background=0D8ABC&color=fff&size=100`}
+            src={profile.avatarUrl || "/logo192.png"}
             alt="avatar"
             className={styles.avatar}
           />
           <div className={styles.userName}>{profile.userName}</div>
           <div className={styles.email}>{profile.email}</div>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>XP</label>
-            <input
-              type="number"
-              className={styles.input}
-              value={xp}
-              onChange={e => setXp(Number(e.target.value))}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Bio</label>
-            <textarea
-              className={styles.textarea}
-              value={bio}
-              onChange={e => setBio(e.target.value)}
-              rows={3}
-            />
-          </div>
-          {success && <div className={`${styles.alert} ${styles.success}`}>{success}</div>}
-          {error && <div className={`${styles.alert} ${styles.error}`}>{error}</div>}
-          <button type="submit" className={styles.button}>Save</button>
-        </form>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Bio</label>
+          <textarea
+            className={styles.textarea}
+            value={profile.bio || ""}
+            onChange={(e) =>
+              setProfile({ ...profile, bio: e.target.value })
+            }
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>XP</label>
+          <input
+            className={styles.input}
+            type="number"
+            value={profile.xp || 0}
+            onChange={(e) =>
+              setProfile({ ...profile, xp: Number(e.target.value) })
+            }
+          />
+        </div>
+        <button className={styles.button} onClick={handleSave}>
+          Save
+        </button>
+        <button
+          className={styles.button}
+          style={{ marginTop: 8 }}
+          onClick={toggleTheme}
+        >
+          Switch to {theme === "light" ? "Dark" : "Light"} Mode
+        </button>
+        {success && <div className={styles.success}>{success}</div>}
+        {error && <div className={styles.error}>{error}</div>}
       </div>
     </div>
   );

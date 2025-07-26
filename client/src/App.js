@@ -18,31 +18,34 @@ import DirectMessagePage from './pages/DirectMessagePage.tsx';
 import ActivityFeedPage from './pages/ActivityFeedPage.tsx';
 import FriendsZonePage from './pages/FriendsZonePage.tsx';
 import FriendProfilePage from './pages/FriendProfilePage.tsx';
+import { ThemeProvider } from './ThemeContext';
 
 function App() {
   return (
-    <BrowserRouter>
-    <Navbar />
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="*" element={<ErrorPage />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/privacy' element={<Privacy />} />
-        <Route path='/learningpath' element={<LearningPath />} />
-        <Route path='/login' element={<Login />} />
-        <Route path="/practice" element={<PracticeListPage />} />
-        <Route path="/practice/:id" element={<PracticeQuestionPage />} />
-        <Route path="/practice-progress" element={<PracticeProgressPage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/friends" element={<FriendsZonePage />} />
-        <Route path="/friends/search" element={<FriendSearchPage />} />
-        <Route path="/friends/requests" element={<FriendRequestsPage />} />
-        <Route path="/friends/list" element={<FriendsListPage />} />
-        <Route path="/friends/message/:friendId" element={<DirectMessagePage />} />
-        <Route path="/friends/activity" element={<ActivityFeedPage />} />
-        <Route path="/friends/profile/:friendId" element={<FriendProfilePage />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="*" element={<ErrorPage />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/privacy' element={<Privacy />} />
+          <Route path='/learningpath' element={<LearningPath />} />
+          <Route path='/login' element={<Login />} />
+          <Route path="/practice" element={<PracticeListPage />} />
+          <Route path="/practice/:id" element={<PracticeQuestionPage />} />
+          <Route path="/practice-progress" element={<PracticeProgressPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/friends" element={<FriendsZonePage />} />
+          <Route path="/friends/search" element={<FriendSearchPage />} />
+          <Route path="/friends/requests" element={<FriendRequestsPage />} />
+          <Route path="/friends/list" element={<FriendsListPage />} />
+          <Route path="/friends/message/:friendId" element={<DirectMessagePage />} />
+          <Route path="/friends/activity" element={<ActivityFeedPage />} />
+          <Route path="/friends/profile/:friendId" element={<FriendProfilePage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

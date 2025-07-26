@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL as apiBaseUrl } from "../config.ts";
 import styles from "../styles/infoPages.module.css";
+import { useTheme } from "../ThemeContext";
 
 export default function Index() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState("");
   const [recentFeed, setRecentFeed] = useState<any[]>([]);
   const [checkedAuth, setCheckedAuth] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     axios.get(`${apiBaseUrl}/profile`, { withCredentials: true })
       .then(res => {
         if (res.data && res.data.userName) {
           setIsAuthenticated(true);
-          setUserName(res.data.userName);
           axios.get(`${apiBaseUrl}/friends/feed`, { withCredentials: true })
             .then(res => {
               const data = Array.isArray(res.data) ? res.data : [];
@@ -28,21 +28,19 @@ export default function Index() {
             });
         } else {
           setIsAuthenticated(false);
-          setUserName("");
           setRecentFeed([]);
         }
         setCheckedAuth(true);
       })
       .catch(() => {
         setIsAuthenticated(false);
-        setUserName("");
         setRecentFeed([]);
         setCheckedAuth(true);
       });
   }, []);
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={styles.pageContainer} data-theme={theme}>
       <h1 className={styles.pageTitle}>Welcome to devsworld</h1>
       <p className={styles.pageText}>
         Your platform for mastering algorithms, connecting with peers, and tracking your progress.
@@ -67,7 +65,7 @@ export default function Index() {
           </Link>
         </div>
       ) : (
-        <div style={{ textAlign: "center", margin: "2.5rem 0 2rem 0", color: "#0d6efd", fontWeight: 500 }}>
+        <div style={{ textAlign: "center", margin: "2.5rem 0 2rem 0", color: "var(--primary)", fontWeight: 500 }}>
           <div style={{ fontSize: "1.15rem", marginBottom: "1.5rem" }}>
             Sign in to access practice, learning paths, friends zone, and your profile!
           </div>

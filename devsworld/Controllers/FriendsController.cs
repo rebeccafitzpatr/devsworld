@@ -71,11 +71,13 @@ public class FriendsController : ControllerBase
         };
         _context.FriendRequests.Add(request);
 
+        var receiverUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == dto.ReceiverId);
+        var receiverUserName = receiverUser?.UserName ?? "Unknown";
         var activity = new Activity
         {
             UserId = sender.Id,
             Type = "SentFriendRequest",
-            Description = $"Sent a friend request to user {dto.ReceiverId}",
+            Description = $"Sent a friend request to {receiverUserName}",
             Timestamp = DateTime.UtcNow
         };
         _context.Activities.Add(activity);
@@ -106,14 +108,16 @@ public class FriendsController : ControllerBase
             };
             _context.Friendships.Add(friendship);
 
+            var senderUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.SenderId);
+            var senderUserName = senderUser?.UserName ?? "Unknown";
             var activity = new Activity
             {
                 UserId = request.ReceiverId,
                 Type = "AcceptedFriendRequest",
-                Description = $"Accepted a friend request from user {request.SenderId}",
+                Description = $"Accepted a friend request from {senderUserName}",
                 Timestamp = DateTime.UtcNow
-              };
-              _context.Activities.Add(activity);
+            };
+            _context.Activities.Add(activity);
         }
         await _context.SaveChangesAsync();
         return Ok();
@@ -178,11 +182,13 @@ public class FriendsController : ControllerBase
         };
         _context.DirectMessages.Add(message);
 
+        var receiverUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == dto.ReceiverId);
+        var receiverUserName = receiverUser?.UserName ?? "Unknown";
         var activity = new Activity
         {
             UserId = sender.Id,
             Type = "SentMessage",
-            Description = $"Sent a message to user {dto.ReceiverId}",
+            Description = $"Sent a message to {receiverUserName}",
             Timestamp = DateTime.UtcNow
         };
         _context.Activities.Add(activity);

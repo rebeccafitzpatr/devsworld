@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL as apiBaseUrl } from "../config.ts";
 import styles from "../styles/navbar.module.css";
+import { useTheme } from "../ThemeContext";
 
 export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   useEffect(() => {
     axios.get(`${apiBaseUrl}/profile`, { withCredentials: true })
@@ -43,8 +45,12 @@ export default function Navbar() {
     navigate("/login");
   };
 
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} data-theme={theme}>
       <div className={styles.navLeft}>
         <Link to="/" className={styles.brand}>devsworld</Link>
         <button
@@ -58,9 +64,7 @@ export default function Navbar() {
         </button>
         <div className={`${styles.links} ${menuOpen || !isMobile ? styles.showMenu : styles.hideMenu}`}>
           <Link to="/" className={styles.link} onClick={() => setMenuOpen(false)}>Home</Link>
-          {isAuthenticated && (
-            <Link to="/profile" className={styles.link} onClick={() => setMenuOpen(false)}>Profile</Link>
-          )}
+          <Link to="/profile" className={styles.link} onClick={() => setMenuOpen(false)}>Profile</Link>
           <Link to="/privacy" className={styles.link} onClick={() => setMenuOpen(false)}>Privacy</Link>
           <Link to="/learningpath" className={styles.link} onClick={() => setMenuOpen(false)}>Learning Path</Link>
           <Link to="/practice" className={styles.link} onClick={() => setMenuOpen(false)}>Practice</Link>
@@ -69,22 +73,15 @@ export default function Navbar() {
         </div>
       </div>
       <div className={styles.navRight}>
-        {!isAuthenticated ? (
-          <>
-            <Link to="/register" className={styles.linkAuth}>Register</Link>
-            <Link to="/login" className={styles.linkAuth}>Login</Link>
-          </>
-        ) : (
-          <>
-            {!isMobile && userName && <span className={styles.userName}>Hello, {userName}</span>}
-            <button
-              onClick={handleLogout}
-              className={styles.logoutBtn}
-            >
-              Logout
-            </button>
-          </>
-        )}
+        <>
+          {!isMobile && userName && <span className={styles.userName}>Hello, {userName}</span>}
+          <button
+            onClick={handleLogout}
+            className={styles.logoutBtn}
+          >
+            Logout
+          </button>
+        </>
       </div>
     </nav>
   );

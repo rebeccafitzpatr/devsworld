@@ -6,9 +6,9 @@
 }
 
 .card {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 1rem;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 16px var(--card-shadow);
     padding: 2rem;
 }
 
@@ -17,6 +17,7 @@
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
+    color: var(--primary);
 }
 
 .formGroup {
@@ -28,6 +29,7 @@
     display: block;
     font-weight: 500;
     margin-bottom: 0.25rem;
+    color: var(--text);
 }
 
 .input {
@@ -36,12 +38,14 @@
     border-radius: 0.5rem;
     border: 1px solid #ccc;
     font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--text);
 }
 
 .button {
     width: 100%;
     padding: 0.75rem;
-    background: #0d6efd;
+    background: var(--primary);
     color: #fff;
     border: none;
     border-radius: 0.5rem;
@@ -53,7 +57,7 @@
 }
 
     .button:hover {
-        background: #0b5ed7;
+        background: var(--link-hover);
     }
 
 .alert {

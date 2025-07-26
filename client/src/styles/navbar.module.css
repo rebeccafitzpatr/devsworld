@@ -1,7 +1,7 @@
 .navbar {
-  background: #fff;
+  background: var(--card-bg);
   border-bottom: 1px solid #e9ecef;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px var(--card-shadow);
   padding: 0.5rem 2rem;
   display: flex;
   flex-direction:row;
@@ -20,7 +20,7 @@
 .brand {
   font-weight: 700;
   font-size: 1.3rem;
-  color: #0d6efd;
+  color: var(--primary);
   text-decoration: none;
   margin-right: 1.5rem;
 }
@@ -40,7 +40,7 @@
 .hamburgerBar {
   width: 28px;
   height: 3px;
-  background: #0d6efd;
+  background: var(--primary);
   margin: 4px 0;
   border-radius: 2px;
   transition: all 0.2s;
@@ -60,7 +60,7 @@
 }
 
 .link {
-  color: #212529;
+  color: var(--text);
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
@@ -70,7 +70,7 @@
 }
 .link:hover {
   background: #e7f1ff;
-  color: #0d6efd;
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .linkAuth {
-  color: #0d6efd;
+  color: var(--primary);
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -91,19 +91,19 @@
 }
 .linkAuth:hover {
   background: #e7f1ff;
-  color: #0b5ed7;
+  color: var(--link-hover);
   text-decoration: none;
 }
 
 .userName {
   font-weight: 600;
   font-size: 1rem;
-  color: #212529;
+  color: var(--text);
 }
 
 .logoutBtn {
-  background: #f8f9fa;
-  color: #0d6efd;
+  background: var(--card-bg);
+  color: var(--primary);
   border: none;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
@@ -113,7 +113,7 @@
 }
 .logoutBtn:hover {
   background: #e7f1ff;
-  color: #0b5ed7;
+  color: var(--link-hover);
 }
 
 @media (max-width: 700px) {
@@ -134,8 +134,8 @@
     position: absolute;
     top: 48px;
     left: 0;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px var(--card-shadow);
     border-radius: 0.5rem;
     flex-direction: column;
     align-items: flex-start;
