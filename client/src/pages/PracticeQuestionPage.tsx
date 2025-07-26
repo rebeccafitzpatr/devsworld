@@ -20,6 +20,7 @@ const PracticeQuestionPage: React.FC = () => {
   const [result, setResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const { messages, sendMessage } = useQuestionChat(id);
@@ -38,6 +39,11 @@ const PracticeQuestionPage: React.FC = () => {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    axios.get(`${apiBaseUrl}/profile`, { withCredentials: true })
+      .then(res => setCurrentUser(res.data.userName));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +67,7 @@ const PracticeQuestionPage: React.FC = () => {
       <button className={styles.backButton} onClick={() => navigate(-1)}>&larr; Back</button>
       <div className={styles.header}>{question.title}</div>
       <div className={styles.difficulty}><strong>Difficulty:</strong> {question.difficulty}</div>
-          <div className={styles.description}>{question.description}</div>
+      <div className={styles.description}>{question.description}</div>
       <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
         <div className={styles.formGroup}>
           <label className={styles.label}>Your Solution:</label>
@@ -71,10 +77,9 @@ const PracticeQuestionPage: React.FC = () => {
             onChange={e => setUserSolution(e.target.value)}
             rows={5}
             required
-                  />
+          />
           <button type="submit" className={styles.solveButton}>Submit</button>
         </div>
-        
       </form>
       {result && (
         <div className={result === 'Correct!' ? styles.success : styles.error} style={{ marginTop: 16 }}>
@@ -98,7 +103,7 @@ const PracticeQuestionPage: React.FC = () => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
               const content = (e.target as HTMLTextAreaElement).value;
-              sendMessage(content, 'Anonymous');
+              sendMessage(currentUser || 'Anonymous', content);
               (e.target as HTMLTextAreaElement).value = '';
             }
           }}
