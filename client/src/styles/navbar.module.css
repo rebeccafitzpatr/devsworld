@@ -1,0 +1,153 @@
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 0.5rem 2rem;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #0d6efd;
+  text-decoration: none;
+  margin-right: 1.5rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.hamburgerBar {
+  width: 28px;
+  height: 3px;
+  background: #0d6efd;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.showMenu {
+  display: flex !important;
+}
+.hideMenu {
+  display: none !important;
+}
+
+.link {
+  color: #212529;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s, color 0.2s;
+}
+.link:hover {
+  background: #e7f1ff;
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.linkAuth {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s, color 0.2s;
+}
+.linkAuth:hover {
+  background: #e7f1ff;
+  color: #0b5ed7;
+  text-decoration: none;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #212529;
+}
+
+.logoutBtn {
+  background: #f8f9fa;
+  color: #0d6efd;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.logoutBtn:hover {
+  background: #e7f1ff;
+  color: #0b5ed7;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0.5rem 1rem;
+  }
+  .navLeft {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .links {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 180px;
+    padding: 1rem 0.5rem;
+    z-index: 100;
+  }
+  .navRight {
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+  .userName {
+    display: none;
+  }
+}

@@ -1,0 +1,121 @@
+.pageContainer {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 2rem;
+}
+
+.pageTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #0d6efd;
+}
+
+.pageText {
+  font-size: 1.15rem;
+  color: #212529;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.learningList {
+  list-style: none;
+  padding-left: 0;
+
+}
+
+.learningItem {
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.learningItemTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0d6efd;
+  margin-bottom: 0.5rem;
+}
+
+.learningItemText {
+  font-size: 1rem;
+  color: #212529;
+}
+
+.homeLinksWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0 0.5rem 0;
+}
+
+.homeLinkCard {
+  background: #f8f9fa;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1.5rem 1rem;
+  text-align: left;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.2s, background 0.2s;
+  border: 1px solid #e9ecef;
+}
+
+.homeLinkCard:hover {
+  background: #e7f1ff;
+  box-shadow: 0 4px 16px rgba(13,110,253,0.08);
+  text-decoration: none;
+}
+
+.homeLinkTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0d6efd;
+  margin-bottom: 0.5rem;
+}
+
+.homeLinkDesc {
+  font-size: 1rem;
+  color: #212529;
+}
+
+.homeActivityCard {
+  background: #fff;
+  border-radius: 0.5rem;
+  margin: 0.5rem auto 1rem auto;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  max-width: 500px;
+  font-size: 1rem;
+  color: #212529;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.homeActivityUser {
+  font-weight: 700;
+  color: #0d6efd;
+  margin-bottom: 0.25rem;
+}
+
+.homeActivityContent {
+  font-size: 1.05rem;
+  color: #212529;
+  margin-bottom: 0.25rem;
+}
+
+.homeActivityTime {
+  color: #888;
+  font-size: 0.95rem;
+  align-self: flex-end;
+}

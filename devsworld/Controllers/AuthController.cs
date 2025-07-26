@@ -47,6 +47,13 @@ public class AuthController : ControllerBase
         return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
     }
 
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return Ok();
+    }
 }
 
 public class LoginDto
