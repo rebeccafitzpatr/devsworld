@@ -268,4 +268,43 @@ public class FriendsController : ControllerBase
 
         return Ok(friend);
     }
+
+    // POST: api/friends/post
+    [HttpPost("post")]
+    public async Task<IActionResult> CreatePost([FromBody] string content)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        var post = new Post
+        {
+            UserId = user.Id,
+            Content = content,
+            CreatedAt = DateTime.UtcNow
+        };
+        _context.Posts.Add(post);
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
+
+    // GET: api/friends/feed
+    [HttpGet("feed")]
+    public async Task<IActionResult> GetFriendsFeed()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        var friends = await _context.Friendships
+            .Where(f => f.UserAId == user.Id || f.UserBId == user.Id)
+            .Select(f => f.UserAId == user.Id ? f.UserBId : f.UserAId)
+            .ToListAsync();
+
+        var posts = await _context.Posts
+            .Where(p => friends.Contains(p.UserId) || p.UserId == user.Id)
+            .OrderByDescending(p => p.CreatedAt)
+            .Take(50)
+            .ToListAsync();
+
+        return Ok(posts);
+    }
 }

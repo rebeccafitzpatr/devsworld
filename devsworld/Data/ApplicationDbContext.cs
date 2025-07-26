@@ -16,8 +16,8 @@ namespace devsworld.Data
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<Activity> Activities { get; set; }
-        public DbSet<DirectMessage> DirectMessages { get; set; }    
-
+        public DbSet<DirectMessage> DirectMessages { get; set; }
+		public DbSet<Post> Posts { get; set; }
 		public DbSet<ChatMessage> ChatMessages { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
