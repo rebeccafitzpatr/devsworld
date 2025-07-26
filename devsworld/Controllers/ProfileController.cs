@@ -20,7 +20,7 @@ public class ProfileController : ControllerBase
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null) return Unauthorized();
-        return Ok(new { user.UserName, user.Email, user.Bio, user.XP });
+        return Ok(new { user.Id, user.UserName, user.Email, user.Bio, user.XP });
     }
 
     [HttpPost]

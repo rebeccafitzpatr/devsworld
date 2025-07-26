@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import styles from "../styles/activityFeed.module.css";
 
 interface CreatePostModalProps {
   onPostCreated?: () => void;
@@ -40,44 +41,35 @@ export default function CreatePostModal({ onPostCreated }: CreatePostModalProps)
 
   return (
     <>
-      <button onClick={() => setShow(true)} style={{ marginBottom: "1rem" }}>
-        Create Post
+      <button
+        onClick={() => setShow(true)}
+        className={styles.createPostButton}
+      >
+        <span style={{ marginRight: 8, fontWeight: 600, fontSize: "1.1rem" }}>+</span> Create Post
       </button>
       {show && (
-        <div style={{
-          position: "fixed",
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(0,0,0,0.3)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 1000
-        }}>
-          <div style={{
-            background: "#fff",
-            padding: "2rem",
-            borderRadius: "1rem",
-            minWidth: 300,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.08)"
-          }}>
-            <h3>Create a Post</h3>
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalCard}>
+            <h3 className={styles.modalTitle}>Create a Post</h3>
             <form onSubmit={handleSubmit}>
               <textarea
                 value={content}
                 onChange={e => setContent(e.target.value)}
                 rows={4}
-                style={{ width: "100%", marginBottom: "1rem" }}
+                className={styles.modalTextarea}
                 placeholder="What's on your mind?"
                 required
               />
-              {error && <div style={{ color: "red", marginBottom: "0.5rem" }}>{error}</div>}
-              {success && <div style={{ color: "green", marginBottom: "0.5rem" }}>{success}</div>}
-              <button type="submit" disabled={loading} style={{ marginRight: "1rem" }}>
-                {loading ? "Posting..." : "Post"}
-              </button>
-              <button type="button" onClick={() => setShow(false)}>
-                Cancel
-              </button>
+              {error && <div className={styles.modalError}>{error}</div>}
+              {success && <div className={styles.modalSuccess}>{success}</div>}
+              <div className={styles.modalActions}>
+                <button type="submit" disabled={loading} className={styles.modalSubmit}>
+                  {loading ? "Posting..." : "Post"}
+                </button>
+                <button type="button" onClick={() => setShow(false)} className={styles.modalCancel}>
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         </div>

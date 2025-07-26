@@ -41,6 +41,19 @@ namespace devsworld.Services
                 UserSolution = userSolution
             };
             _context.UserQuestionAttempts.Add(attempt);
+
+            // Record activity for any attempt
+            var activity = new Activity
+            {
+                UserId = userId,
+                Type = isCorrect ? "SolvedQuestion" : "AttemptedQuestion",
+                Description = isCorrect
+                    ? $"Solved '{question.Title}'"
+                    : $"Attempted '{question.Title}'",
+                Timestamp = DateTime.UtcNow
+            };
+            _context.Activities.Add(activity);
+
             await _context.SaveChangesAsync();
             return attempt;
         }
@@ -67,4 +80,3 @@ namespace devsworld.Services
         public int Solved { get; set; }
     }
 }
-    

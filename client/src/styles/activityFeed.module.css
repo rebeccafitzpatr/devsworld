@@ -1,0 +1,187 @@
+.feedContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.feedItem {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  background: #e9ecef;
+  object-fit: cover;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.feedTypePost {
+  color: #0d6efd;
+}
+
+.feedTypeSolved {
+  color: #198754;
+}
+
+.feedTypeAttempted {
+  color: #fd7e14;
+}
+
+.feedTypeMessage {
+  color: #6f42c1;
+}
+
+.feedTypeDefault {
+  color: #212529;
+}
+
+.feedContent {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.feedTimestamp {
+  font-size: 0.9rem;
+  color: #888;
+  align-self: flex-end;
+}
+
+.postItem {
+  background: #e7f1ff;
+  border-left: 4px solid #0d6efd;
+}
+
+.activityItem {
+  background: #f8f9fa;
+  border-left: 4px solid #fd7e14;
+}
+
+.createPostButton {
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    display: block;
+    margin-left: auto;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+    transition: background 0.2s;
+}
+.createPostButton:hover {
+  background: #0b5ed7;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalCard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  min-width: 350px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modalTextarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.modalSubmit {
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modalSubmit:hover {
+  background: #0b5ed7;
+}
+
+.modalCancel {
+  background: #f8f9fa;
+  color: #212529;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modalCancel:hover {
+  background: #e9ecef;
+}
+
+.modalError {
+  color: #842029;
+  background: #f8d7da;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.modalSuccess {
+  color: #0f5132;
+  background: #d1e7dd;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}

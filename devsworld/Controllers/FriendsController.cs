@@ -70,6 +70,16 @@ public class FriendsController : ControllerBase
             RequestedAt = DateTime.UtcNow
         };
         _context.FriendRequests.Add(request);
+
+        var activity = new Activity
+        {
+            UserId = sender.Id,
+            Type = "SentFriendRequest",
+            Description = $"Sent a friend request to user {dto.ReceiverId}",
+            Timestamp = DateTime.UtcNow
+        };
+        _context.Activities.Add(activity);
+
         await _context.SaveChangesAsync();
         return Ok();
     }
@@ -95,6 +105,15 @@ public class FriendsController : ControllerBase
                 FriendsSince = DateTime.UtcNow
             };
             _context.Friendships.Add(friendship);
+
+            var activity = new Activity
+            {
+                UserId = request.ReceiverId,
+                Type = "AcceptedFriendRequest",
+                Description = $"Accepted a friend request from user {request.SenderId}",
+                Timestamp = DateTime.UtcNow
+              };
+              _context.Activities.Add(activity);
         }
         await _context.SaveChangesAsync();
         return Ok();
@@ -158,6 +177,16 @@ public class FriendsController : ControllerBase
             SentAt = DateTime.UtcNow
         };
         _context.DirectMessages.Add(message);
+
+        var activity = new Activity
+        {
+            UserId = sender.Id,
+            Type = "SentMessage",
+            Description = $"Sent a message to user {dto.ReceiverId}",
+            Timestamp = DateTime.UtcNow
+        };
+        _context.Activities.Add(activity);
+
         await _context.SaveChangesAsync();
         return Ok();
     }
@@ -197,7 +226,14 @@ public class FriendsController : ControllerBase
             .ToListAsync();
 
         var activities = await _context.Activities
-            .Where(a => friends.Contains(a.UserId))
+            .Join(_context.Users, a => a.UserId, u => u.Id, (a, u) => new {
+                a.Id,
+                a.Type,
+                a.Description,
+                a.Timestamp,
+                UserId = a.UserId,
+                UserName = u.UserName
+            })
             .OrderByDescending(a => a.Timestamp)
             .Take(50)
             .ToListAsync();
@@ -283,6 +319,16 @@ public class FriendsController : ControllerBase
             CreatedAt = DateTime.UtcNow
         };
         _context.Posts.Add(post);
+
+        var activity = new Activity
+        {
+            UserId = user.Id,
+            Type = "CreatedPost",
+            Description = "Created a new post",
+            Timestamp = DateTime.UtcNow
+        };
+        _context.Activities.Add(activity);
+
         await _context.SaveChangesAsync();
         return Ok();
     }
@@ -300,7 +346,13 @@ public class FriendsController : ControllerBase
             .ToListAsync();
 
         var posts = await _context.Posts
-            .Where(p => friends.Contains(p.UserId) || p.UserId == user.Id)
+            .Join(_context.Users, p => p.UserId, u => u.Id, (p, u) => new {
+                p.Id,
+                p.Content,
+                p.CreatedAt,
+                UserId = p.UserId,
+                UserName = u.UserName
+            })
             .OrderByDescending(p => p.CreatedAt)
             .Take(50)
             .ToListAsync();
