@@ -244,4 +244,28 @@ public class FriendsController : ControllerBase
 
         return Ok(requests);
     }
+
+    // GET: api/friends/profile/{friendId}
+    [HttpGet("profile/{friendId}")]
+    public async Task<IActionResult> GetFriendProfile(string friendId)
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null) return Unauthorized();
+
+        // Only allow viewing profiles of friends
+        var areFriends = await _context.Friendships
+            .AnyAsync(f => (f.UserAId == user.Id && f.UserBId == friendId) || (f.UserAId == friendId && f.UserBId == user.Id));
+        if (!areFriends)
+            return BadRequest("You can only view profiles of your friends.");
+
+        var friend = await _context.Users
+            .Where(u => u.Id == friendId)
+            .Select(u => new { u.Id, u.UserName, u.Email, u.Bio, u.XP })
+            .FirstOrDefaultAsync();
+
+        if (friend == null)
+            return NotFound();
+
+        return Ok(friend);
+    }
 }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import { Link } from "react-router-dom";
 
 export default function FriendsListPage() {
   const [friends, setFriends] = useState<any[]>([]);
@@ -17,6 +18,12 @@ export default function FriendsListPage() {
       {friends.map(f => (
         <div key={f.id}>
           {f.userName} ({f.email})
+          <Link to={`/friends/profile/${f.id}`}>
+            <button>View Profile</button>
+          </Link>
+          <Link to={`/friends/message/${f.id}`}>
+            <button>Message</button>
+          </Link>
         </div>
       ))}
     </div>

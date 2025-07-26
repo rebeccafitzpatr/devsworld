@@ -17,6 +17,7 @@ import FriendsListPage from './pages/FriendsListPage.tsx';
 import DirectMessagePage from './pages/DirectMessagePage.tsx';
 import ActivityFeedPage from './pages/ActivityFeedPage.tsx';
 import FriendsZonePage from './pages/FriendsZonePage.tsx';
+import FriendProfilePage from './pages/FriendProfilePage.tsx';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/friends/list" element={<FriendsListPage />} />
         <Route path="/friends/message/:friendId" element={<DirectMessagePage />} />
         <Route path="/friends/activity" element={<ActivityFeedPage />} />
+        <Route path="/friends/profile/:friendId" element={<FriendProfilePage />} />
       </Routes>
     </BrowserRouter>
   );
