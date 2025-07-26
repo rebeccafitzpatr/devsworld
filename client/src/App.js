@@ -11,6 +11,12 @@ import PracticeListPage from './pages/PracticeListPage.tsx';
 import PracticeQuestionPage from './pages/PracticeQuestionPage.tsx';
 import PracticeProgressPage from './pages/PracticeProgressPage.tsx';
 import Register from './pages/Register.tsx';
+import FriendSearchPage from './pages/FriendSearchPage.tsx';
+import FriendRequestsPage from './pages/FriendRequestsPage.tsx';
+import FriendsListPage from './pages/FriendsListPage.tsx';
+import DirectMessagePage from './pages/DirectMessagePage.tsx';
+import ActivityFeedPage from './pages/ActivityFeedPage.tsx';
+import FriendsZonePage from './pages/FriendsZonePage.tsx';
 
 function App() {
   return (
@@ -27,6 +33,12 @@ function App() {
         <Route path="/practice/:id" element={<PracticeQuestionPage />} />
         <Route path="/practice-progress" element={<PracticeProgressPage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/friends" element={<FriendsZonePage />} />
+        <Route path="/friends/search" element={<FriendSearchPage />} />
+        <Route path="/friends/requests" element={<FriendRequestsPage />} />
+        <Route path="/friends/list" element={<FriendsListPage />} />
+        <Route path="/friends/message/:friendId" element={<DirectMessagePage />} />
+        <Route path="/friends/activity" element={<ActivityFeedPage />} />
       </Routes>
     </BrowserRouter>
   );

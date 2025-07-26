@@ -22,6 +22,9 @@ export default function Navbar() {
                 <Link to="/practice-progress">Progress</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/login">Login</Link>
+                <li>
+                  <Link className="nav-link text-dark" to="/friends">Friends</Link>
+                </li>
         </ul>
       </nav>
     );
