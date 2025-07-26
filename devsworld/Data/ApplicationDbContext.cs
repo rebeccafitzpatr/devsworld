@@ -13,6 +13,10 @@ namespace devsworld.Data
         public DbSet<DsaTopic> DsaTopics { get; set; }
         public DbSet<DsaQuestion> DsaQuestions { get; set; } // Added for practice problems
         public DbSet<UserQuestionAttempt> UserQuestionAttempts { get; set; } // Added for user attempts
+        public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<DirectMessage> DirectMessages { get; set; }    
 
 		public DbSet<ChatMessage> ChatMessages { get; set; }
 
