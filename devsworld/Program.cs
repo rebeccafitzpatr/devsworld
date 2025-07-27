@@ -10,8 +10,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
         policy => policy
-            .WithOrigins("https://polite-meadow-073938f00.1.azurestaticapps.net", "http://localhost:3000")
-            .AllowAnyHeader()
+            .WithOrigins("https://polite-meadow-073938f00.1.azurestaticapps.net", "http://localhost:3000", "https://devsworldapp.lemongrass-0bc5ba5c.australiasoutheast.azurecontainerapps.io", "https://devsworldclient.lemongrass-0bc5ba5c.australiasoutheast.azurecontainerapps.io")
+
+			.AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
     );
