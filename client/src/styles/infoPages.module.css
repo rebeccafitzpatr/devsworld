@@ -149,3 +149,19 @@
   background: var(--card-bg);
   border-left: 4px solid #fd7e14;
 }
+
+/* Example for dark mode */
+[data-theme='dark'] {
+  --bubble-friend-bg: #2a2e38;
+  --bubble-friend-text: #e0e6f7;
+  --bubble-user-bg: #2563eb;
+  --bubble-user-text: #fff;
+}
+
+/* Example for light mode */
+[data-theme='light'] {
+  --bubble-friend-bg: #e7f1ff;
+  --bubble-friend-text: #222;
+  --bubble-user-bg: #2563eb;
+  --bubble-user-text: #fff;
+}

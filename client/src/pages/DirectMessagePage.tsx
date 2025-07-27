@@ -32,27 +32,42 @@ export default function DirectMessagePage() {
   return (
     <div className={styles.pageContainer} data-theme={theme}>
       <h2 className={styles.pageTitle}>Direct Messages</h2>
-      <div style={{ maxHeight: "350px", overflowY: "auto", marginBottom: "2rem", padding: "1rem", background: "var(--card-bg)", borderRadius: "1rem", boxShadow: "0 1px 4px var(--card-shadow)" }}>
-        {messages.map((m, i) => (
-          <div key={i} style={{
-            display: "flex",
-            flexDirection: m.senderId === friendId ? "row" : "row-reverse",
-            alignItems: "flex-end",
-            marginBottom: "1rem"
-          }}>
-            <div style={{
-              background: m.senderId === friendId ? "#e7f1ff" : "var(--primary)",
-              color: m.senderId === friendId ? "var(--text)" : "#fff",
-              borderRadius: "1rem",
-              padding: "0.75rem 1.25rem",
-              maxWidth: "70%",
-              boxShadow: "0 1px 4px var(--card-shadow)",
-              fontSize: "1.05rem"
+      <div style={{
+        maxHeight: "350px",
+        overflowY: "auto",
+        marginBottom: "2rem",
+        padding: "1rem",
+        background: "var(--card-bg)",
+        borderRadius: "1rem",
+        boxShadow: "0 1px 4px var(--card-shadow)"
+      }}>
+        {messages.map((m, i) => {
+          const isFriend = m.senderId === friendId;
+          return (
+            <div key={i} style={{
+              display: "flex",
+              flexDirection: isFriend ? "row" : "row-reverse",
+              alignItems: "flex-end",
+              marginBottom: "1rem"
             }}>
-              <b>{m.senderId === friendId ? "Friend" : "You"}:</b> {m.content}
+              <div style={{
+                background: isFriend
+                  ? "var(--bubble-friend-bg, #2a2e38)" // fallback for dark mode
+                  : "var(--bubble-user-bg, #2563eb)",   // fallback for dark mode
+                color: isFriend
+                  ? "var(--bubble-friend-text, #e0e6f7)" // fallback for dark mode
+                  : "var(--bubble-user-text, #fff)",      // fallback for dark mode
+                borderRadius: "1rem",
+                padding: "0.75rem 1.25rem",
+                maxWidth: "70%",
+                boxShadow: "0 1px 4px var(--card-shadow)",
+                fontSize: "1.05rem"
+              }}>
+                <b>{isFriend ? "Friend" : "You"}:</b> {m.content}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         <div ref={messagesEndRef} />
       </div>
       <form onSubmit={sendMessage} style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>

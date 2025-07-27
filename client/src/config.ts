@@ -1,1 +1,1 @@
-export const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://devsworld-enffcyd7dnabewb3.australiasoutheast-01.azurewebsites.net/api';
+export const API_BASE_URL = 'https://devsworldapp.lemongrass-0bc5ba5c.australiasoutheast.azurecontainerapps.io/api';
