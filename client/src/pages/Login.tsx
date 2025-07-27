@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "../styles/signin.module.css";
-import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import { API_BASE_URL as apiBaseUrl } from "../config";
 
 export default function Login() {
     const [userName, setUserName] = useState("");

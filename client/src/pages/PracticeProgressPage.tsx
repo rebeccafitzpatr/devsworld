@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/practice.module.css';
-import { API_BASE_URL as apiBaseUrl } from '../config.ts';
+import { API_BASE_URL as apiBaseUrl } from '../config';
 
 interface UserProgressDto {
   attempted: number;

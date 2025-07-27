@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_BASE_URL as apiBaseUrl } from "../config.ts";
-import CreatePostModal from "../components/CreatePostModal.tsx";
+import { API_BASE_URL as apiBaseUrl } from "../config";
+import CreatePostModal from "../components/CreatePostModal";
 import styles from "../styles/activityFeed.module.css";
 
 function getTypeClass(type: string) {

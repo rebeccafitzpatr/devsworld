@@ -1,7 +1,6 @@
-// client/src/pages/FriendsListPage.tsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import { API_BASE_URL as apiBaseUrl } from "../config";
 import { Link } from "react-router-dom";
 import styles from "../styles/infoPages.module.css";
 import { useTheme } from "../ThemeContext";

@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import { API_BASE_URL as apiBaseUrl } from "../config";
 import styles from "../styles/infoPages.module.css";
 import { useTheme } from "../ThemeContext";
 

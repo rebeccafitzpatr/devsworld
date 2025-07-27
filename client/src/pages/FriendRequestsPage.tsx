@@ -1,7 +1,7 @@
-// client/src/pages/FriendRequestsPage.tsx
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import { API_BASE_URL as apiBaseUrl } from "../config";
 import styles from "../styles/infoPages.module.css";
 import { useTheme } from "../ThemeContext";
 

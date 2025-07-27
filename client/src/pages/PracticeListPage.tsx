@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../styles/practice.module.css';
-import { API_BASE_URL as apiBaseUrl } from '../config.ts';
+import { API_BASE_URL as apiBaseUrl } from '../config';
 
 interface DsaQuestion {
   id: number;

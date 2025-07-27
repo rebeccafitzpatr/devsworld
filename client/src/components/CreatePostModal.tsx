@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_BASE_URL as apiBaseUrl } from "../config.ts";
+import { API_BASE_URL as apiBaseUrl } from "../config";
 import styles from "../styles/activityFeed.module.css";
 
 interface CreatePostModalProps {
