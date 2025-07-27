@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  frontend:
+    image: devsworldregistry.azurecr.io/devsworld-frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: devsworldregistry.azurecr.io/devsworld-backend:latest
+    ports:
+      - "5138:5138"
+    environment:
+      ConnectionStrings__DefaultConnection: "Data Source=devsworld.database.windows.net;Initial Catalog=devsworld_db;User ID=rebecca;Password=188571rF!;Connect Timeout=60;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;"
+      ASPNETCORE_URLS: "http://+:5138"
