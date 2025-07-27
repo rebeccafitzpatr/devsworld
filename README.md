@@ -4,6 +4,14 @@
 >
 >  LINK -- https://devsworldclient.lemongrass-0bc5ba5c.australiasoutheast.azurecontainerapps.io/ 
 
+## SETUP INSTRUCTIONS: 
+clone repo, open terminal in project root
+- ``cd client``
+- ``npm start`` to run the app for development
+  
+ or
+ 
+- ``npm run build`` to build for production
 ---
 
 ## 📚 Overview
